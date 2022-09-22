@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.MyWatchList",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "Interstellar",
+            "rating": 5,
+            "release_date": "6 November 2014",
+            "review": "Best movie I've ever watched, solid 10/10!!!"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchList",
+        "pk": 2,
+        "fields": {
+            "watched": true,
+            "title": "Howl's Moving Castle",
+            "rating": 5,
+            "release_date": "20 November 2004",
+            "review": "Aesthetically pleasing ghibli movie"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchList",
+        "pk": 3,
+        "fields": {
+            "watched": true,
+            "title": "The Grave of Fireflies",
+            "rating": 4.5,
+            "release_date": "16 April 1988",
+            "review": "Can't rewatch it for the sake of my poor lil heart"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchList",
+        "pk": 4,
+        "fields": {
+            "watched": true,
+            "title": "Mean Girls",
+            "rating": 3,
+            "release_date": "30 April 2004",
+            "review": "Kind mid but Regina George slaysss"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchList",
+        "pk": 5,
+        "fields": {
+            "watched": true,
+            "title": "Clueless",
+            "rating": 3.5,
+            "release_date": "19 Juli 1995",
+            "review": "Slightly better version of Mean Girls"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchList",
+        "pk": 6,
+        "fields": {
+            "watched": true,
+            "title": "Fight Club",
+            "rating": 4,
+            "release_date": "11 November 1999",
+            "review": "Has a really good plot twist but I got spoiled before I could even watch it :/"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchList",
+        "pk": 7,
+        "fields": {
+            "watched": false,
+            "title": "The Wolf of Wall Street",
+            "rating": 4.5,
+            "release_date": "21 Januari 2014",
+            "review": "IDK if it's good or not but Leonardo DiCaprio's there so..."
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchList",
+        "pk": 8,
+        "fields": {
+            "watched": false,
+            "title": "500 Days of Summer",
+            "rating": 3.5,
+            "release_date": "17 Juli 2009",
+            "review": "AND IF A DOUBLE DECKER BUS CRASHES INTO USSSS"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchList",
+        "pk": 9,
+        "fields": {
+            "watched": true,
+            "title": "Top Gun: Maverick",
+            "rating": 3,
+            "release_date": "27 Mei 2022",
+            "review": "Mmmmm... Tom Cruise"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchList",
+        "pk": 10,
+        "fields": {
+            "watched": false,
+            "title": "Doctor Strange in the Multiverse of Madness",
+            "rating": 3.5,
+            "release_date": "5 Mei 2022",
+            "review": "Looks dope but I don't watch Marvel but Benedict Cucumber's there"
+        }
+    }
+]

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+  <head>
+    <title>My Watchlist</title>
+  </head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800&display=swap');
+
+    body {
+      background-color: #023047;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-weight: 800;
+      color: #ffb703;
+    }
+
+    table {
+      margin-left: auto;
+      margin-right: auto;
+      border-collapse: collapse;
+      border: 5px solid #eae2b7;
+    }
+
+    #header {
+      font-weight: bold;
+    }
+
+    th {
+      background-color: #eae2b7;
+      color: #023047;
+      font-weight: 100;
+      padding: 5px 10px;
+      border: 2px solid #fb8500;
+    }
+
+    a {
+      color: white;
+      font-weight: bold;
+    }
+
+    a:visited {
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+
+  <h1>Assignment 3 PBP</h1>
+  <p>{{nama}}</p>
+  <p>{{id}}</p>
+
+  <br>
+
+  <h3>{{nama}}'s Watchlist</h3>
+
+  <table>
+    <tr>
+      <th id="header">Watched</th>
+      <th id="header">Movie Title</th>
+      <th id="header">Rating</th>
+      <th id="header">Release Date</th>
+      <th id="header">Review</th>
+    </tr>
+    {% comment %} Add the data below this line {% endcomment %}
+    {% for columns in data %}
+    <tr>
+      {% if columns.watched  %}
+        <th>✅</th>
+      {% else %}
+        <th>❌</th>
+      {% endif %}
+      <th>{{columns.title}}</th>
+      <th>{{columns.rating}}</th>
+      <th>{{columns.release_date}}</th>
+      <th>{{columns.review}}</th>
+    </tr>
+  {% endfor %}
+  </table>
+  <p>View data in <a href="/mywatchlist/xml">XML</a> or <a href="/mywatchlist/json">JSON</a></p>
+
+ {% endblock content %}
