@@ -46,4 +46,18 @@ Kita memerlukan *data delivery* untuk mempermudah platform untuk menerima data t
     ```
 11. Melakukan push pada GitHub dan Heroku app akan otomatis ter-update.
 
+## Screenshot Postman
+
+Tampilan HTML :
+
+![Postman HTML](/resources/html.png)
+
+Tampilan XML :
+
+![Postman XML](/resources/xml.png)
+
+Tampilan JSON :
+
+![Postman JSON](/resources/json.png)
+
 Hasil aplikasi Heroku yang telah dibuat [di sini](https://tugas-1-pbp.herokuapp.com/mywatchlist/).
