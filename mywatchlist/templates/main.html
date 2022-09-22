@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+  <head>
+    <title>My Watchlist Main</title>
+  </head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800&display=swap');
+
+    body {
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #023047;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    a {
+      color: white;
+      font-weight: bold;
+    }
+
+    a:visited {
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+
+  <p>View data in <a href="/mywatchlist/html">HTML</a> or <a href="/mywatchlist/xml">XML</a> or <a href="/mywatchlist/json">JSON</a></p>
+
+ {% endblock content %}
