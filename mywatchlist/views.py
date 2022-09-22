@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from django.core import serializers
 from mywatchlist.models import MyWatchList
 
+def main(request):
+    return render(request, "main.html")
+
 def show_watchlist(request):
     my_watchlist = MyWatchList.objects.all()
 
