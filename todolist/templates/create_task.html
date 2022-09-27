@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Create Task</title>
+{% endblock meta %}
+
+{% block content %}
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800&display=swap');
+
+    body {
+        background-color: #fefae0;
+        color: #283618;
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    a {
+        background-color: #bc6c25;
+        color: white;
+        font-weight: 800;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-width: 0px;
+    }
+
+    table {
+        margin-left: auto;
+        margin-right: auto;
+        border-collapse: collapse;
+        border: 5px solid #faedcd;
+        min-width: 75vw;
+    }
+
+    th {
+        background-color: #faedcd;
+        font-weight: 100;
+        padding: 5px 10px;
+        border: 2px solid #606c38;
+    }
+
+    .buttons {
+        padding-top: 20px;
+    }
+</style>
+
+<div class = "NewTask">
+    <h1>Add a New Task</h1>
+
+    <p>It is {% now "jS F Y H:i" %}</p>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <label for = "task_name">Task Name :</label>
+        <input id = "task_name" type = "text" name = "task_name" value="{{ current_name }}" required>
+
+        <label for = "task_description">Task Description :</label>
+        <input id = "task_description" type = "text" name = "task_description" value="{{ current_description }}">
+    </form>
+
+
+    <div class = "buttons">
+        <a href="{% url 'todolist:show_todolist' %}">New Task!</a>
+        <a href="{% url 'todolist:show_todolist' %}">Back</a>
+    </div>
+</div>
+
+{% endblock content %}
