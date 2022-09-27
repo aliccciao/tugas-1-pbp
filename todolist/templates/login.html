@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800&display=swap');
+
+    body {
+        background-color: #fefae0;
+        color: #283618;
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    a {
+        color: #bc6c25;
+        font-weight: 800;
+        text-decoration: none;
+    }
+
+    table {
+        margin-left: auto;
+        margin-right: auto;
+        border-collapse: collapse;
+        border: 5px solid #faedcd;
+        padding: 50px;
+    }
+
+    th {
+        background-color: #faedcd;
+        font-weight: 100;
+        padding: 5px 10px;
+        border: 2px solid #606c38;
+    }
+
+    .form-control {
+        background: #dda15e;
+        color: #613610;
+        padding: 5px 10px;
+        border: none;
+    }
+
+    .buttons {
+        padding-top: 20px;
+    }
+</style>
+
+<div class = "login">
+
+    <h1>Login</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input class="btn login_btn" type="submit" value="Login"></td>
+            </tr>
+        </table>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}    
+        
+    Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
+
+</div>
+
+{% endblock content %}

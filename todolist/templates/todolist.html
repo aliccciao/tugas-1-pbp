@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800&display=swap');
+
+    body {
+      background-color: #fefae0;
+      color: #283618;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    a {
+      background-color: #bc6c25;
+      color: white;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-width: 0px;
+    }
+
+    table {
+      margin-left: auto;
+      margin-right: auto;
+      border-collapse: collapse;
+      border: 5px solid #faedcd;
+      min-width: 75vw;
+    }
+
+    th {
+      background-color: #faedcd;
+      font-weight: 100;
+      padding: 5px 10px;
+      border: 2px solid #606c38;
+    }
+
+    .buttons {
+      padding-top: 20px;
+    }
+
+  </style>
+
+  <h1>This is {{data.user}}'s todolist!</h1>
+
+  <table>
+    <tr>
+      <th>Date Added</th>
+      <th>Task Name</th>
+      <th>Task Description</th>
+    </tr>
+    {% comment %} Add the data below this line {% endcomment %}
+    {% for barang in data %}
+    <tr>
+        <th>{{barang.date}}</th>
+        <th>{{barang.title}}</th>
+        <th>{{barang.sescription}}</th>
+    </tr>
+  {% endfor %}
+  </table>
+
+  <div class = "buttons">
+    <a href="{% url 'todolist:create_task' %}">New Task!</a>
+    <a href="{% url 'todolist:logout' %}">Logout</a>
+  </div>
+
+ {% endblock content %}
