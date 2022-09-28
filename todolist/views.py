@@ -67,7 +67,7 @@ def create_task(request):
             user = request.user,
             title = title,
             description = description,
-            date = datetime.time.microsecond()
+            date = datetime.datetime.today()
         )
         
         return HttpResponseRedirect(reverse("todolist:show_todolist"))
