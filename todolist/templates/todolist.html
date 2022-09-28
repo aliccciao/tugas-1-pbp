@@ -41,30 +41,44 @@
       font-weight: 800;
     }
 
-    a {
+    #button {
       font-weight: 800;
       padding: 5px 10px;
       background-color: #ffb703;
       color: #023047;
       text-decoration: none;
     }
+
+    a {
+      text-decoration: none;
+      font-weight: 800;
+      color: #e36003;
+    }
   </style>
 
   <h1>This is {{user}}'s todolist!</h1>
-  <a href="{% url 'todolist:create_task' %}">New Task!</a>
-  <a href="{% url 'todolist:logout' %}">Logout</a>
+  <a id = "button" href="{% url 'todolist:create_task' %}">New Task!</a>
+  <a id = "button" href="{% url 'todolist:logout' %}">Logout</a>
 
   <table>
     <tr>
       <th id = "header">Date Added</th>
       <th id = "header">Task Name</th>
       <th id = "header">Task Description</th>
+      <th id = "header">Status</th>
+      <th id = "header">Actions</th>
     </tr>
     {% for barang in data_todolist %}
     <tr>
         <th>{{barang.date}}</th>
         <th>{{barang.title}}</th>
         <th>{{barang.description}}</th>
+        {% if barang.is_finished  %}
+          <th><a href="update/{{barang.pk}}">✅</a></th>
+        {% else %}
+          <th><a href="update/{{barang.pk}}">❌</a></th>
+        {% endif %}
+        <th><a href="delete/{{barang.pk}}">Delete Task</a></th>
     </tr>
   {% endfor %}
   </table>

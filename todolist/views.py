@@ -67,8 +67,27 @@ def create_task(request):
             user = request.user,
             title = title,
             description = description,
-            date = datetime.datetime.now()
+            date = datetime.datetime.now(),
+            is_finished = False
         )
         
         return HttpResponseRedirect(reverse("todolist:show_todolist"))
     return render(request, "create_task.html")
+
+def update(request, id):
+    task = Task.objects.filter(user = request.user).get(pk = id)
+
+    if (task.is_finished):
+        task.is_finished = False
+    else :
+        task.is_finished = True
+    task.save()
+
+    return HttpResponseRedirect(reverse("todolist:show_todolist"))
+
+def delete(request, id):
+    task = Task.objects.filter(user = request.user).get(pk = id)
+
+    task.delete()
+
+    return HttpResponseRedirect(reverse("todolist:show_todolist"))

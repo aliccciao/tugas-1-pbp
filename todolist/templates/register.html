@@ -7,67 +7,61 @@
 {% block content %} 
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800&display=swap');
 
-    body {
-      background-color: #023047;
-      color: white;
-      padding-top: 50px;
-      font-family: 'Montserrat', sans-serif;
-      text-align: center;
-      letter-spacing: 1px;
-    }
+  body {
+    background-color: #023047;
+    color: white;
+    padding-top: 50px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    letter-spacing: 1px;
+  }
 
-    h1 {
-      font-weight: 800;
-      color: #ffb703;
-    }
+  h1 {
+    font-weight: 800;
+    color: #ffb703;
+  }
 
-    table {
-      margin-top: 20px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: left;
-    }
+  table {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    .form-control {
-      background-color: #8ECAE6;
-      color: #023047;
-      outline: none;
-      border: 0px;
-    }
+  td {
+    text-align: left;
+  }
 
-    .login_btn {
-      font-weight: 800;
-      padding: 5px 10px;
-      background-color: #ffb703;
-      color: #023047;
-      text-decoration: none;
-      border: 0px;
-      width: 75px;
-      margin-top: 10px;
-    }
+  tr {
+    border: 5px;
+  }
 
-    a {
-      color: white;
-      font-weight: bold;
-    }
+  input {
+    outline: none;
+    border: 0px;
+    height: 20px;
+    width: 200px;
+  }
 
-    a:visited {
-      color: white;
-      font-weight: bold;
-    }
-  </style>
+  #button {
+    font-weight: 800;
+    background-color: #ffb703;
+    color: #023047;
+    border: 0px;
+    height: 30px;
+  }
+</style>
 
 <div class = "login">
-    <h1>Formulir Registrasi</h1>
+    <h1>Register New User</h1>
         <form method="POST" >  
             {% csrf_token %}  
             <table>  
                 {{ form.as_table }}  
                 <tr>  
                     <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
+                    <td><input id = "button" type="submit" name="submit" value="Daftar"/></td>  
                 </tr>  
             </table>  
         </form>

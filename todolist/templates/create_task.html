@@ -41,16 +41,34 @@
       border: 2px solid #fb8500;
     }
 
-    #header {
-      font-weight: 800;
+    .form {
+      margin-top: 5px;
     }
 
-    a {
+    #input {
+      outline: none;
+      border: 0px;
+      height: 20px;
+      width: 200px;
+    }
+
+    #input::placeholder {
+      color: #023047;
+      opacity: 1; /* Firefox */
+    }
+
+    .buttons {
+      margin: 0px 5px;
+    }
+
+    button {
       font-weight: 800;
       padding: 5px 10px;
       background-color: #ffb703;
       color: #023047;
       text-decoration: none;
+      border: 0px;
+      margin-top: 10px;
     }
   </style>
 
@@ -61,16 +79,25 @@
 
     <form method="POST" action="">
         {% csrf_token %}
-        <label for="title">Title</label>
-        <input type="text" name="title" placeholder="Give your task a name">
+        <div class = "form">
+          <label for="title">Title</label>
+          <input id = "input" type="text" name="title" placeholder="Give your task a name">
+        </div>
 
-        <label for="description">Description</label>
-        <input type="text" name="description" placeholder="Give your task a description">
+        <br>
 
-        <button id = "button" type="submit">New Task!</button>
+        <div class = "form">
+          <label for="description">Description</label>
+          <input id = "input" type="text" name="description" placeholder="Give your task a description">
+        </div>
+
+        <br>
+
+        <div class = "buttons">
+          <button id = "button" type="submit">New Task!</button>
+          <button id = "button" href="{% url 'todolist:show_todolist' %}">Back</button>
+        </div>
     </form>
-
-    <a id = "button" href="{% url 'todolist:show_todolist' %}">Back</a>
 
     {% if messages %}  
         <ul>   
