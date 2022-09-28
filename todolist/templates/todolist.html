@@ -6,64 +6,67 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800&display=swap');
 
     body {
-      background-color: #fefae0;
-      color: #283618;
+      background-color: #023047;
+      color: white;
+      padding-top: 50px;
       font-family: 'Montserrat', sans-serif;
       text-align: center;
       letter-spacing: 1px;
     }
 
-    a {
-      background-color: #bc6c25;
-      color: white;
+    h1 {
       font-weight: 800;
-      text-decoration: none;
-      padding: 5px 10px;
-      border-width: 0px;
+      color: #ffb703;
     }
 
     table {
+      margin-top: 20px;
       margin-left: auto;
       margin-right: auto;
       border-collapse: collapse;
-      border: 5px solid #faedcd;
+      border: 5px solid #eae2b7;
       min-width: 75vw;
+      max-width: 90vw;
     }
 
     th {
-      background-color: #faedcd;
+      background-color: #eae2b7;
+      color: #023047;
       font-weight: 100;
       padding: 5px 10px;
-      border: 2px solid #606c38;
+      border: 2px solid #fb8500;
     }
 
-    .buttons {
-      padding-top: 20px;
+    #header {
+      font-weight: 800;
     }
 
+    a {
+      font-weight: 800;
+      padding: 5px 10px;
+      background-color: #ffb703;
+      color: #023047;
+      text-decoration: none;
+    }
   </style>
 
-  <h1>This is {{data.user}}'s todolist!</h1>
+  <h1>This is {{user}}'s todolist!</h1>
+  <a href="{% url 'todolist:create_task' %}">New Task!</a>
+  <a href="{% url 'todolist:logout' %}">Logout</a>
 
   <table>
     <tr>
-      <th>Date Added</th>
-      <th>Task Name</th>
-      <th>Task Description</th>
+      <th id = "header">Date Added</th>
+      <th id = "header">Task Name</th>
+      <th id = "header">Task Description</th>
     </tr>
-    {% comment %} Add the data below this line {% endcomment %}
-    {% for barang in data %}
+    {% for barang in data_todolist %}
     <tr>
         <th>{{barang.date}}</th>
         <th>{{barang.title}}</th>
-        <th>{{barang.sescription}}</th>
+        <th>{{barang.description}}</th>
     </tr>
   {% endfor %}
   </table>
-
-  <div class = "buttons">
-    <a href="{% url 'todolist:create_task' %}">New Task!</a>
-    <a href="{% url 'todolist:logout' %}">Logout</a>
-  </div>
 
  {% endblock content %}

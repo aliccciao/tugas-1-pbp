@@ -10,45 +10,53 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800&display=swap');
 
     body {
-        background-color: #fefae0;
-        color: #283618;
-        font-family: 'Montserrat', sans-serif;
-        text-align: center;
-        letter-spacing: 1px;
+      background-color: #023047;
+      color: white;
+      padding-top: 50px;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      letter-spacing: 1px;
     }
 
-    a {
-        color: #bc6c25;
-        font-weight: 800;
-        text-decoration: none;
+    h1 {
+      font-weight: 800;
+      color: #ffb703;
     }
 
     table {
-        margin-left: auto;
-        margin-right: auto;
-        border-collapse: collapse;
-        border: 5px solid #faedcd;
-        padding: 50px;
-    }
-
-    th {
-        background-color: #faedcd;
-        font-weight: 100;
-        padding: 5px 10px;
-        border: 2px solid #606c38;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .form-control {
-        background: #dda15e;
-        color: #613610;
-        padding: 5px 10px;
-        border: none;
+      background-color: #8ECAE6;
+      color: #023047;
+      outline: none;
+      border: 0px;
     }
 
-    .buttons {
-        padding-top: 20px;
+    .login_btn {
+      font-weight: 800;
+      padding: 5px 10px;
+      background-color: #ffb703;
+      color: #023047;
+      text-decoration: none;
+      border: 0px;
+      width: 75px;
+      margin-top: 10px;
     }
-</style>
+
+    a {
+      color: white;
+      font-weight: bold;
+    }
+
+    a:visited {
+      color: white;
+      font-weight: bold;
+    }
+  </style>
 
 <div class = "login">
 
@@ -58,20 +66,17 @@
         {% csrf_token %}
         <table>
             <tr>
-                <td>Username: </td>
+                <td>Username </td>
                 <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
             </tr>
                     
             <tr>
-                <td>Password: </td>
+                <td>Password </td>
                 <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
             </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
         </table>
+
+        <input class="login_btn" type="submit" value="Login">
     </form>
 
     {% if messages %}
@@ -82,7 +87,7 @@
         </ul>
     {% endif %}    
         
-    Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
+    <p>Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a></p>
 
 </div>
 
