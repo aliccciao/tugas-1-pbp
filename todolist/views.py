@@ -1,8 +1,7 @@
 import datetime
-from django import forms
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -17,7 +16,6 @@ def register(request):
 
         if form.is_valid():
             form.save()
-            messages.success(request, "You've successfully created a new account!")
             return redirect('todolist:login')
 
     context = {'form' : form}
@@ -46,32 +44,31 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
-@login_required(login_url = '/todolist/login/')
+@login_required(login_url = 'login/')
 def show_todolist(request):
-    data = Task.objects.all()
+    user = get_user(request)
+    data = Task.objects.filter(user = user)
 
     context = {
         'data_todolist' : data,
+        'user' : user,
         'last_login' : request.COOKIES['last_login']
     }
 
     return render(request, "todolist.html", context)
 
+@login_required(login_url = 'login/')
 def create_task(request):
-    form = UserCreationForm()
+    if request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("description")
 
-    if request.method == 'POST':
-
-        if form.is_valid():
-            form.save()
-            user = request.user
-            date = datetime.date.today()
-            title = request.POST.get('task_name')
-            description = request.POST.get('task_description')
-
-            task = Task.objects.create(user = user, date = date, title = title, description = description)
-            messages.success(request, "Successfully added task!")
-            return redirect('todolist:show_todolist')
-
-    context = {'form' : form}
-    return render(request, 'create_task.html', context)
+        Task.objects.create(
+            user = request.user,
+            title = title,
+            description = description,
+            date = datetime.time.microsecond()
+        )
+        
+        return HttpResponseRedirect(reverse("todolist:show_todolist"))
+    return render(request, "create_task.html")
