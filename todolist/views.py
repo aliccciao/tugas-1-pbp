@@ -52,7 +52,7 @@ def show_todolist(request):
     context = {
         'data_todolist' : data,
         'user' : user,
-        'last_login' : request.COOKIES['last_login']
+        'last_login' : request.COOKIES
     }
 
     return render(request, "todolist.html", context)
