@@ -8,56 +8,52 @@ Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu 
 
 **Kelas** : B
 
-## Kegunaan `{% csrf_token %}` pada elemen `<form>`
+## Kegunaan `{% csrf_token %}` pada Elemen `<form>`
 
-CSRF memiliki arti Cross-Site Request Forgery yang dapat menyerang pengguna ketika 
+Penggunaan `{% csrf_token %}` diperlukan agar Django dapat me-render sebuah halaman dan dilakukan cross-check dengan request di dalam server. Jika request tidak memiliki token yang sesuai, maka server tidak akan menjalankan request. Jika tidak menggunakan `{% csrf_token %}`, maka request terhadap server tidak akan dijalankan dan memunculkan error.
 
-## Mengapa memerlukan *data delivery*
+## Membuat `<form>` secara Manual
 
-Kita memerlukan *data delivery* untuk mempermudah platform untuk menerima data trhadap perangkat satu ke perangkat lainnya.
+Kita bisa membuat form dengan cara manual di dalam templates HTML. Tetapi di dalam opening tag `<form>`, perlu ditambahkan method yang akan dipakai sehingga menjadi `<form method = "POST">`.
+
+## Proses Alur Data
+
+Ketika sebuah user mengeklik button subit pada form, button tersebut akan mengirimkan sebuah "POST" request ke dalam server. Lalu, membuat object baru menggunakan `Task.objects.create` dengan parameter seluruh fields dari class dengan data diambil dengan method `request.POST.get()`. Setelah itu, untuk menampilkan task berdasarkan user yang log in, diperlukan pengambilan objects dengan filter user, menjadi `Task.objects.filter(user = get_user(request))`. Terakhir, seluruh data akan ditampilkan ke dalam templates menggunakan looping.
 
 ## Tahap pengimplementasian
 
-1. Membuat aplikasi baru bernama `mywatchlist`.
+1. Membuat aplikasi baru bernama `todolist`.
 
-2. Menambahkan "mywatchlist" ke dalam list app (`INSTALLED_APPS`) yang berada pada `project_django/settings.py`.
+2. Menambahkan "todolist" ke dalam list app (`INSTALLED_APPS`) yang berada pada `project_django/settings.py`.
 
-3. Membuat function `main`, `show_watchlist`, `show_xml`, `show_json`, `show_json_by_id`, dan `show_xml_by_id` pada `views.py`. Setiap function memiliki tugas yang berbeda sesuai dengan namanya masing masing.
+3. Membuat function `register`, `login_user`, `logout_user`, `show_todolist`, `create_task`, `update`, dan `delete` pada `views.py`. Setiap function memiliki tugas yang berbeda sesuai dengan namanya masing masing.
 
-4. Menambahkan katalog ke dalam list url (`urlpatterns`) pada `project_django/urls.py`.
+4. Menambahkan todolist ke dalam list url (`urlpatterns`) pada `project_django/urls.py`.
 
-5. Menambahkan "mywatchlist" ke dalam nama aplikasi (`app_name`) pada `mywatchlist/urls.py`.
+5. Menambahkan "todolist" ke dalam nama aplikasi (`app_name`) pada `todolist/urls.py`.
 
-6. Menambahkan rute berbagai tampilan ke dalam list url (`urlpatterns`) pada `mywatchlist/urls.py`. Rute tersebut mencakup: main route, html route, xml route, json route, xml by id route, dan json by id route.
+6. Menambahkan rute berbagai tampilan ke dalam list url (`urlpatterns`) pada `todolist/urls.py`. Rute tersebut mencakup: main route, register, login, logout, membuat task baru, mengupdate task, dan men-delete task.
 
-7. Membuat file `main.html` dalam templates untuk tampilan awal aplikasi.
+7. Membuat file `todolist.html`, `register.html`, `login.html`, dan `create_task.html` dalam templates untuk tampilan HTML aplikasi. Data dari template ini akan diambil dari `views.py`.
 
-8. Membuat file `watchlist.html` dalam templates untuk tampilan HTML aplikasi. Data dari template ini akan diambil dari `views.py`.
+8. Melakukan push pada GitHub dan Heroku app akan otomatis ter-update.
 
-9. Agar data pada `katalog/fixtures/initial_wishlist_data.json` dapat di-update, jalankan command di bawah di dalam terminal.
+## Screenshot hasil akhir website
 
-        python manage.py loaddata initial_wishlist_data.json
+Tampilan page login :
 
-10. Mengedit `Procfile` menjadi line berikut agar Heroku dapat mengupdate data
+![Tampilan page login](/resources/todolist-login.png)
 
-    ```
-    release: sh -c 'python manage.py migrate && python manage.py migrate --run-syncdb && python manage.py loaddata initial_catalog_data.json && python manage.py loaddata initial_wishlist_data.json'
-    web: gunicorn project_django.wsgi --log-file -
-    ```
-11. Melakukan push pada GitHub dan Heroku app akan otomatis ter-update.
+Tampilan page register :
 
-## Screenshot Postman
+![Tampilan page register](/resources/todolist-register.png)
 
-Tampilan HTML :
+Tampilan page todolist :
 
-![Postman HTML](/resources/html.png)
+![Tampilan page todolist](/resources/todolist-main.png)
 
-Tampilan XML :
+Tampilan page create task :
 
-![Postman XML](/resources/xml.png)
+![Tampilan page create task](/resources/todolist-create-task.png)
 
-Tampilan JSON :
-
-![Postman JSON](/resources/json.png)
-
-Hasil aplikasi Heroku yang telah dibuat [di sini](https://tugas-1-pbp.herokuapp.com/mywatchlist/).
+Hasil aplikasi Heroku yang telah dibuat [di sini](https://tugas-1-pbp.herokuapp.com/todolist/).
