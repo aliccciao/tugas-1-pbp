@@ -61,7 +61,7 @@
       margin: 0px 5px;
     }
 
-    button {
+    button, a {
       font-weight: 800;
       padding: 5px 10px;
       background-color: #ffb703;
@@ -95,7 +95,7 @@
 
         <div class = "buttons">
           <button id = "button" type="submit">New Task!</button>
-          <button id = "button" href="{% url 'todolist:show_todolist' %}">Back</button>
+          <a id = "button" href="{% url 'todolist:show_todolist' %}">Back</a>
         </div>
     </form>
 
