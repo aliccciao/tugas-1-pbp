@@ -56,4 +56,56 @@ Tampilan page create task :
 
 ![Tampilan page create task](/resources/todolist-create-task.png)
 
+# Tugas 5: Web Design Using HTML, CSS, and CSS Framework
+
+## Perbedaan inline, internal, dan external CSS
+
+- Inline    : berada di dalam opening tag HTML, cocok digunakan jika ingin memberikan *styling* yang simple (contoh: memberi warna, membuat teks menjadi bold/italic, etc ...)
+
+- Internal  : berada di dalam file HTML dan di dalam tag `<style>`, cocok untuk mengubah *style* dari 1 halaman dan mengurangi ukuran file dari template
+
+- External  : menggunakan file tersendiri dengan ekstensi `.css`, cocok digunakan jika setiap tampilan halaman html menggunakan *style* yang sama
+
+## Tag HTML
+
+Terdapat benyak sekali tag dalam html, beberapa diantaranta adalah :
+
+- `<head>`                      : menyimpan seluruh pengaturan dari file HTML
+
+- `<title>`                     : membuat judul dari halaman
+
+- `<h1>, <h2>, hingga <h6>`     : membuat teks yang berupa heading
+
+- `<p>`                         : membuat teks normal yang berupa paragraf
+
+- `<br>`                        : membuat line break
+
+- `<div>`                       : membuat *section* atau *divider* pada file HTML
+
+- `<a>`                         : membuat link untuk mengakses halaman lain
+
+- Dan masih banyak lagi ...
+
+## Selector CSS
+
+- `*`                           : mengakses seluruh elemen pada HTML
+
+- `.<class>`                    : mengakses sebuah class pada HTML
+
+- `#<id>`                       : mengakses sebuah elemen dengan id tertentu pada HTML
+
+- `<element>`                   : mengakses seluruh elemen tersebut pada HTML
+
+- `<element>:<pseuco-class>`    : mengakses keadaan / pseudo-class dari elemen tertentu pada HTML
+
+- Dan masih banyak lagi ...
+
+## Tahap pengimplementasian
+
+1. Menambahkan beberapa kode dalam `base.html` agar project dapat menggunakan Bootstrap
+
+2. Mengedit kode pada `todolist.html` dan `login.html`
+
+3. Melakukan push pada GitHub dan Heroku app akan otomatis ter-update.
+
 Hasil aplikasi Heroku yang telah dibuat [di sini](https://tugas-1-pbp.herokuapp.com/todolist/).
