@@ -91,3 +91,13 @@ def delete(request, id):
     task.delete()
 
     return HttpResponseRedirect(reverse("todolist:show_todolist"))
+
+def show_task(request, id):
+    task = Task.objects.filter(user = request.user).get(pk = id)
+
+    context = {
+        'task' : task,
+        'last_login' : request.COOKIES
+    }
+
+    return render(request, "task.html", context)

@@ -19,7 +19,6 @@
     }
 
     h1 {
-      font-weight: 800;
       color: #ffb703;
     }
 
@@ -49,7 +48,6 @@
 
     a {
       color: white;
-      font-weight: bold;
     }
 
     a:visited {
@@ -58,13 +56,13 @@
     }
   </style>
 
-<div class = "login">
+<div class = "flex min-h-screen flex-col items-center justify-center gap-5">
 
-    <h1>Login</h1>
+    <h1 class = "fw-bold">Login</h1>
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
+        <table class = "gap-5 text-left grid grid-cols-3 grid-rows-3">
             <tr>
                 <td>Username </td>
                 <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
@@ -87,7 +85,7 @@
         </ul>
     {% endif %}    
         
-    <p>Don't have an account? Sign in <a href="{% url 'todolist:register' %}">here.</a></p>
+    <p>Don't have an account? Sign in <a href="{% url 'todolist:register' %}" class = "fw-bold">here.</a></p>
 
 </div>
 

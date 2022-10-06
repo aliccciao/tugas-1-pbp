@@ -1,5 +1,5 @@
 from django.urls import path
-from todolist.views import show_todolist, register, login_user, logout_user, create_task, update, delete
+from todolist.views import show_todolist, register, login_user, logout_user, create_task, update, delete, show_task
 
 app_name = 'todolist'
 
@@ -10,5 +10,6 @@ urlpatterns = [
     path('logout/', logout_user, name = 'logout'),
     path('create-task/', create_task, name = 'create_task'),
     path('update/<int:id>', update, name = 'update'),
-    path('delete/<int:id>', delete, name = 'delete')
+    path('delete/<int:id>', delete, name = 'delete'),
+    path('task/<int:id>', show_task, name = 'show_task')
 ]

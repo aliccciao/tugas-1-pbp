@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
  {% block content %}
 
   <style>
@@ -12,21 +11,17 @@
       font-family: 'Montserrat', sans-serif;
       text-align: center;
       letter-spacing: 1px;
+      overflow-x: hidden;
     }
 
     h1 {
-      font-weight: 800;
       color: #ffb703;
     }
 
     table {
       margin-top: 20px;
-      margin-left: auto;
-      margin-right: auto;
       border-collapse: collapse;
       border: 5px solid #eae2b7;
-      min-width: 75vw;
-      max-width: 90vw;
     }
 
     th {
@@ -37,8 +32,12 @@
       border: 2px solid #fb8500;
     }
 
-    #header {
+    #table-header {
       font-weight: 800;
+    }
+
+    .buttons {
+      margin: 0px 5px;
     }
 
     #button {
@@ -56,31 +55,40 @@
     }
   </style>
 
-  <h1>This is {{user}}'s todolist!</h1>
-  <a id = "button" href="{% url 'todolist:create_task' %}">New Task!</a>
-  <a id = "button" href="{% url 'todolist:logout' %}">Logout</a>
+  <div class="flex min-h-screen flex-col items-center justify-center gap-5">
+    <div class = "flex flex-col md:flex-row  gap-4 justify-center items-center">
+      <h1 class = "fw-bold">This is {{user}}'s todolist!</h1>
+      <div class = "buttons">
+        <a id = "button" href="{% url 'todolist:create_task' %}">New Task!</a>
+        <a id = "button" href="{% url 'todolist:logout' %}">Logout</a>
+      </div>
+    </div>
 
-  <table>
-    <tr>
-      <th id = "header">Date Added</th>
-      <th id = "header">Task Name</th>
-      <th id = "header">Task Description</th>
-      <th id = "header">Status</th>
-      <th id = "header">Actions</th>
-    </tr>
-    {% for barang in data_todolist %}
-    <tr>
-        <th>{{barang.date}}</th>
-        <th>{{barang.title}}</th>
-        <th>{{barang.description}}</th>
-        {% if barang.is_finished  %}
-          <th><a href="update/{{barang.pk}}">✅</a></th>
-        {% else %}
-          <th><a href="update/{{barang.pk}}">❌</a></th>
-        {% endif %}
-        <th><a href="delete/{{barang.pk}}">Delete Task</a></th>
-    </tr>
-  {% endfor %}
-  </table>
+    <div class="table-responsive">
+      <table>
+        <tr>
+          <th id = "table-header">Date Added</th>
+          <th id = "table-header">Task Name</th>
+          <th id = "table-header">Task Description</th>
+          <th id = "table-header">Status</th>
+          <th id = "table-header">Actions</th>
+        </tr>
+        {% for barang in data_todolist %}
+        <tr>
+            <th>{{barang.date}}</th>
+            <th><a href="task/{{barang.pk}}">{{barang.title}}</a></th>
+            <th>{{barang.description}}</th>
+            {% if barang.is_finished  %}
+              <th><a href="update/{{barang.pk}}">✅</a></th>
+            {% else %}
+              <th><a href="update/{{barang.pk}}">❌</a></th>
+            {% endif %}
+            <th><a href="delete/{{barang.pk}}">Delete Task</a></th>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+  </div>
+  
 
  {% endblock content %}
