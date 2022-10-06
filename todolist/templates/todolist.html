@@ -24,9 +24,11 @@
       border: 5px solid #eae2b7;
       margin-left: auto;
       margin-right: auto;
+      margin-bottom: 20px;
+      max-width: 85vw;
     }
 
-    th {
+    th, .card {
       background-color: #eae2b7;
       color: #023047;
       font-weight: 100;
@@ -55,40 +57,58 @@
       font-weight: 800;
       color: #e36003;
     }
+
+    .card a {
+      background-color: #023047;
+      color:#eae2b7; 
+    }
   </style>
 
-  <div class="flex min-h-screen flex-col items-center justify-center gap-5">
-    <div class = "flex flex-col md:flex-row  gap-4 justify-center items-center">
-      <h1 class = "fw-bold">This is {{user}}'s todolist!</h1>
-      <div class = "buttons">
-        <a id = "button" href="{% url 'todolist:create_task' %}">New Task!</a>
-        <a id = "button" href="{% url 'todolist:logout' %}">Logout</a>
-      </div>
+  <div class = "flex flex-col md:flex-row  gap-4 justify-center items-center">
+    <h1 class = "fw-bold">This is {{user}}'s todolist!</h1>
+    <div class = "buttons">
+      <a id = "button" href="{% url 'todolist:create_task' %}">New Task!</a>
+      <a id = "button" href="{% url 'todolist:logout' %}">Logout</a>
     </div>
+  </div>
 
-    <div class="table-responsive">
-      <table>
-        <tr>
-          <th id = "table-header">Date Added</th>
-          <th id = "table-header">Task Name</th>
-          <th id = "table-header">Task Description</th>
-          <th id = "table-header">Status</th>
-          <th id = "table-header">Actions</th>
-        </tr>
-        {% for barang in data_todolist %}
-        <tr>
-            <th>{{barang.date}}</th>
-            <th><a href="task/{{barang.pk}}">{{barang.title}}</a></th>
-            <th>{{barang.description}}</th>
-            {% if barang.is_finished  %}
-              <th><a href="update/{{barang.pk}}">✅</a></th>
-            {% else %}
-              <th><a href="update/{{barang.pk}}">❌</a></th>
-            {% endif %}
-            <th><a href="delete/{{barang.pk}}">Delete Task</a></th>
-        </tr>
+  <div class="table-responsive">
+    <table>
+      <tr>
+        <th id = "table-header">Date Added</th>
+        <th id = "table-header">Task Name</th>
+        <th id = "table-header">Task Description</th>
+        <th id = "table-header">Status</th>
+        <th id = "table-header">Actions</th>
+      </tr>
+      {% for task in data_todolist %}
+      <tr>
+          <th>{{task.date}}</th>
+          <th>{{task.title}}</th>
+          <th>{{task.description}}</th>
+          {% if task.is_finished  %}
+            <th><a href="update/{{task.pk}}">✅</a></th>
+          {% else %}
+            <th><a href="update/{{task.pk}}">❌</a></th>
+          {% endif %}
+          <th><a href="delete/{{task.pk}}">Delete Task</a></th>
+      </tr>
+    {% endfor %}
+    </table>
+  </div>
+
+  <div class="container">
+    <div class="row gap-5">
+      {% for task in data_todolist %}
+      <div class="card col-sm" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{task.title}}</h5>
+          <p class="card-text text-muted">Created on : {{task.date}}</p>
+          <p class="card-text">{{task.description}}</p>
+          <a href="delete/{{task.pk}}" class="btn btn-primary fw-bold">Delete Task</a>
+        </div>
+      </div>
       {% endfor %}
-      </table>
     </div>
   </div>
   
