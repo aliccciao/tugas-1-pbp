@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
- {% block content %}
+ {% block meta %}
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800&display=swap');
@@ -18,30 +18,17 @@
       color: #ffb703;
     }
 
-    table {
-      margin-top: 20px;
-      border-collapse: collapse;
-      border: 5px solid #eae2b7;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 20px;
-      max-width: 85vw;
-    }
-
-    th, .card {
+    .card {
       background-color: #eae2b7;
       color: #023047;
       font-weight: 100;
       padding: 5px 10px;
       border: 2px solid #fb8500;
+      min-width: 30vw;
     }
 
     #table-header {
       font-weight: 800;
-    }
-
-    .buttons {
-      margin: 0px 5px;
     }
 
     #button {
@@ -52,65 +39,130 @@
       text-decoration: none;
     }
 
-    a {
+    a, button {
       text-decoration: none;
       font-weight: 800;
       color: #e36003;
+      border: none;
+      background-color: rgb(0, 0, 0, 0);
+      margin: 0px 5px;
     }
 
-    .card a {
-      background-color: #023047;
-      color:#eae2b7; 
+    #daftar_todolist {
+      margin-top: 20px;
     }
   </style>
+{% endblock meta %}
 
-  <div class = "flex flex-col md:flex-row  gap-4 justify-center items-center">
-    <h1 class = "fw-bold">This is {{user}}'s todolist!</h1>
-    <div class = "buttons">
-      <a id = "button" href="{% url 'todolist:create_task' %}">New Task!</a>
-      <a id = "button" href="{% url 'todolist:logout' %}">Logout</a>
-    </div>
-  </div>
+{% block content %}
 
-  <div class="table-responsive">
-    <table>
-      <tr>
-        <th id = "table-header">Date Added</th>
-        <th id = "table-header">Task Name</th>
-        <th id = "table-header">Task Description</th>
-        <th id = "table-header">Status</th>
-        <th id = "table-header">Actions</th>
-      </tr>
-      {% for task in data_todolist %}
-      <tr>
-          <th>{{task.date}}</th>
-          <th>{{task.title}}</th>
-          <th>{{task.description}}</th>
-          {% if task.is_finished  %}
-            <th><a href="update/{{task.pk}}">✅</a></th>
-          {% else %}
-            <th><a href="update/{{task.pk}}">❌</a></th>
-          {% endif %}
-          <th><a href="delete/{{task.pk}}">Delete Task</a></th>
-      </tr>
-    {% endfor %}
-    </table>
-  </div>
+{% if messages %}
+        {% for message in messages %}
+            <br>
+            <div class="toast show" role="alert" style="margin: auto;">
+                <div class="toast-body text-center bg-success text-white">
+                    {{message}}
+                </div>
+            </div>
+        {% endfor %}
+{% endif %}
 
-  <div class="container">
-    <div class="row gap-5">
-      {% for task in data_todolist %}
-      <div class="card col-sm" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title fw-bold">{{task.title}}</h5>
-          <p class="card-text text-muted">Created on : {{task.date}}</p>
-          <p class="card-text">{{task.description}}</p>
-          <a href="delete/{{task.pk}}" class="btn btn-primary fw-bold">Delete Task</a>
-        </div>
+<div class="modal fade" id="addTodolistModal" tabindex="-1" aria-labelledby="addTodolistModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTodolistModalLabel">Add Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      {% endfor %}
+      <form id="form" onsubmit="return false;">
+      <div class="modal-body">
+        {% csrf_token %}
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Judul:</label>
+            <input id="title" type="text" name="title" placeholder="Title" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Deskripsi:</label>
+            <input id="description" type="text" name="description" placeholder="Description" class="form-control">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="submit" type="submit" type="button" value="Submit" class="btn btn-success" data-bs-dismiss="modal">Submit</button>
+      </div>
+    </form>
     </div>
   </div>
-  
+</div>
 
- {% endblock content %}
+<div class = "flex flex-col md:flex-row  gap-4 justify-center items-center">
+  <h1 class = "fw-bold">This is {{user}}'s todolist!</h1>
+  <div class = "buttons">
+    <a id="button" data-bs-toggle="modal" data-bs-target="#addTodolistModal" style = "cursor: pointer;">
+      Add Task
+    </a>
+    <a id = "button" href="{% url 'todolist:logout' %}">Logout</a>
+  </div>
+</div>
+
+<div id="daftar_todolist"></div>
+
+<br>
+
+<script>
+    async function getTodolist() {
+      return fetch('/todolist/json/').then((res) => res.json())
+    }
+  
+    async function refreshTodolist() {
+          document.getElementById("title").value = ""
+          document.getElementById("description").value = ""
+
+          document.getElementById("daftar_todolist").innerHTML = ""
+          const todolist = await getTodolist()
+          let htmlString = ``
+          todolist.forEach((item) => {
+            htmlString += `\n<div class="card" style="margin: auto; width: 70%;">
+            <div>
+                <div class="fw-bold">${item.fields.title}</div>
+                <div>${item.fields.date}</div>
+            </div>
+
+            <div class="card-body">
+                <p class="card-text">${item.fields.description}</p>
+                <br>`
+            if(item.fields.is_finished == true) {
+              htmlString += `\n<p class="card-text fw-bold">Finished ✅</p>`
+            }
+            else {
+              htmlString += `\n<p class="card-text fw-bold">Unfinished ❌</p>`
+            }
+            htmlString += `\n<br>
+                <a href="update-task/${item.pk}">Ubah Status</a>
+                <button onclick="deleteTodolist(${item.pk})">Hapus</button>
+            </div>
+            </div>
+            <br>`
+          })
+          
+          document.getElementById("daftar_todolist").innerHTML = htmlString
+    }
+  
+    function addTodolist() {
+      fetch('/todolist/add/', {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshTodolist)
+      return false
+    }
+
+    function deleteTodolist(id) {
+      fetch(`/todolist/delete/${id}`).then(refreshTodolist)
+      return false
+    }
+  
+    document.getElementById("submit").onclick = addTodolist
+    refreshTodolist()
+</script>
+
+{% endblock content %}
